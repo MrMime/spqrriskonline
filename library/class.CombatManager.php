@@ -44,8 +44,8 @@ class CombatManager
 			$p1Dice = ($p1Unit <= 3) ? $p1Unit : 3;
 			$p2Dice = ($p2Unit <= 3) ? $p2Unit : 3;
 			$unitRemaning = CombatManager::terranAttack($p1Dice, $p2Dice,$logManager);
-			$p1Unit = $unitRemaning[0];
-			$p2Unit = $unitRemaning[1];
+			$p1Unit = $p1Unit-($p1Dices-$unitRemaning[0]);
+			$p2Unit = $p2Unit-($p2Dices-$unitRemaning[1]);
 		}
 		return array(max(0,$p1Unit),max(0,$p2Unit));
 	}
