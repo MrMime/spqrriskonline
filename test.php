@@ -1,27 +1,17 @@
 <?php
 
-	include('class.Cards.php');
-	include('class.CardsManager.php');
+	include('library/class.Cards.php');
+	include('library/class.CardsManager.php');
+	include('library/class.DiceManager.php');
+	include('library/class.CombatManager.php');
+	include('library/class.LogManager.php');
 	
-	$carte = array();
+	$logManager = new LogManager();
 	
-	$carte[0] = Cards.FLAG;
-	$carte[1] = Cards.FLAG;
-	$carte[2] = Cards.COLISEUM;
-	
-	if (CardsManager::checkIfExchangeAvaiable($carte)){
-		echo 'posso'; 
-	}
-	else {
-		echo 'noposso';
-	}
-	
-	try {
-		CardsManager::getUnitForChange($carte);
-	}
-	catch (Exception $e){
-		echo $e->getMessage();
-	}
+	echo '<pre>';
+	print_r (CombatManager::bySeaAttack(18, 8,$logManager));
+	print_r ($logManager->getLog());
+	echo '</pre>';
 
 
 ?>
