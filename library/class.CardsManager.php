@@ -2,6 +2,18 @@
 
 class CardsManager {
 	
+	protected $_grimoryBase = array();
+	
+	
+	public function baseGrimory(){
+		$this->_grimoryBase[Cards.LEGIONARY] = 25;
+		$this->_grimoryBase[Cards.COLISEUM] = 5;
+		$this->_grimoryBase[Cards.FLAG] = 15;
+		$this->_grimoryBase[Cards.SHIP] = 10;
+		
+	}
+	
+	
 	/**
 	 * 
 	 * Translate 3 cards in relative units 
