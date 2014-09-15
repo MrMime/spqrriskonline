@@ -3,13 +3,43 @@
 class CardsManager {
 	
 	protected $_grimoryBase = array();
+	protected $_startupGrimory = array();
 	
 	
-	public function baseGrimory(){
-		$this->_grimoryBase[Cards.LEGIONARY] = 25;
-		$this->_grimoryBase[Cards.COLISEUM] = 5;
-		$this->_grimoryBase[Cards.FLAG] = 15;
-		$this->_grimoryBase[Cards.SHIP] = 10;
+	public function __construct(){
+		$this->_grimoryBase[Cards.LEGIONARY] 	= 25;
+		$this->_grimoryBase[Cards.COLISEUM] 	= 5;
+		$this->_grimoryBase[Cards.FLAG] 		= 15;
+		$this->_grimoryBase[Cards.SHIP] 		= 10;
+	}
+	
+	public function makeStartupGrimory(){
+		$grimory = $this->_grimoryBase;
+		$i = 0;
+		while(array_sum($grimory) > 0){
+			$card = rand(1,55);
+			if ($card > 10 && $card <=35 && $grimory[Cards.LEGIONARY]>0){
+				$this->_startupGrimory[$i] = Cards.LEGIONARY;
+				$grimory[Cards.LEGIONARY]-=1;
+				$i++;
+			}
+			if ($card >35 && $card < 50 && $grimory[Cards.FLAG]>0){
+				$this->_startupGrimory[$i] = Cards.FLAG;
+				$grimory[Cards.FLAG]-=1;
+				$i++;
+			}
+			if ($card <= 10 && $grimory[Cards.SHIP]>0){
+				$this->_startupGrimory[$i] = Cards.SHIP;
+				$grimory[Cards.SHIP]-=1;
+				$i++;
+			}
+			if ($card >50 && $grimory[Cards.COLISEUM]>0){
+				$this->_startupGrimory[$i] = Cards.COLISEUM;
+				$grimory[Cards.COLISEUM]-=1;
+				$i++;
+			}
+		}
+		return $this->_startupGrimory;
 		
 	}
 	
