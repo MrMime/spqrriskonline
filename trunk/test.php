@@ -13,7 +13,7 @@
 	
 	$xml = simplexml_load_file('./db/cards.xml');
 	echo '<pre>';
-	$query = trim($xml->sql[0]);
+	$query = trim($xml->userCards);
 	echo $query;
 	$parameters = array('id_user'=>1,'id_game'=>1);
 	print_r ($db->query($query,$parameters));
