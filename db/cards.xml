@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <query>
-	<sql id="cards">
-			SELECT * FROM spq_risk_cards
+	<sql id="userCards">
+		SELECT RC.* FROM spq_risk_cards RC
+		JOIN spq_risk_user_cards UC ON (UC.ID_CARD = RC.ID_CARD)
+		WHERE 
+			UC.ID_GAME = :id_game
+			AND 
+			UC.ID_USER = :id_user
+		ORDER BY RC.ID_CARD ASC
 	</sql>
 </query>

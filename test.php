@@ -10,12 +10,14 @@
 	
 	$db = new PDFDatabase();
 	$db->connect("root", "", "spq_risk", "localhost:3306");
-	$data = $db->query("SELECT * FROM spq_risk_turn_phase_name", null);
 	
 	$xml = simplexml_load_file('./db/cards.xml');
-	
 	echo '<pre>';
-	echo (trim($xml->sql[0]));
+	$query = trim($xml->sql[0]);
+	echo $query;
+	$parameters = array('id_user'=>1,'id_game'=>1);
+	print_r ($db->query($query,$parameters));
+	
 	echo '</pre>';
 
 
