@@ -49,7 +49,7 @@ class CardsManager {
 	
 	/**
 	 * Translate 3 cards in relative units 
-	 * @param array of CARDS $tris 
+	 * @param array of CARDS 
 	 * @return array of units [0] terran unit; [1] naval unit; [2] coliseum
 	 */
 	static function getUnitForChange($tris){

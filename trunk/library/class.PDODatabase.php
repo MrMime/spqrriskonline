@@ -9,6 +9,13 @@ class PDFDatabase
 		
 	}
 	
+	/**
+	 * Make a connection to DB with PDO Interface
+	 * @param String $user DB User
+	 * @param String $pw DB Password
+	 * @param String $dbName DB Name
+	 * @param String $dbHost DB Host and port
+	 */
 	public function connect($user,$pw,$dbName,$dbHost){
 		$dsnPdo = 'mysql:dbname='.$dbName.';host='.$dbHost;
 		$this->_pdo_interface = new PDO($dsnPdo, $user, $pw);
@@ -19,6 +26,12 @@ class PDFDatabase
 		return $this->_lastId;
 	}
 	
+	/**
+	 * Execute a Query with relative parameters
+	 * @param String $query
+	 * @param Array $parameters
+	 * @return Last ID of query is Insert |Array if query is SELECT
+	 */
 	public function query($query,$parameters){
 		$stmt = $this->_pdo_interface->prepare($query);
 		try {
