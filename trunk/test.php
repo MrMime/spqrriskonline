@@ -5,16 +5,15 @@
 	include('library/class.DiceManager.php');
 	include('library/class.CombatManager.php');
 	include('library/class.LogManager.php');
+	include('library/class.UnitManager.php');
 	
-	$logManager = new LogManager();
-	$cManager = new CardsManager();
+	$uManager = new UnitManager();
 	
 	echo '<pre>';
-	//print_r (CombatManager::bySeaAttack(18, 8,$logManager));
-// 	$unitLost = CombatManager::seaAttack(3, 2, $logManager);
-// 	echo 'P1 rimane con '.(3-$unitLost[0]).' P2 rimane con '.(2-$unitLost[1]); 
-// 	print_r ($logManager->getLog());
-	print_r ($cManager->makeStartupGrimory());
+	for ($i = 1;$i<25;$i++){
+		echo $i.': '.$uManager->startLegionary($i);
+		echo '<br>';
+	}
 	echo '</pre>';
 
 
