@@ -27,6 +27,13 @@ class PDFDatabase
 					$this->_lastId = $pdo_interface->lastInsertId();
 					return $this->_lastId;
 				}
+				if (preg_match('/^SELECT/',$query)){
+					$returnArray = array();
+					foreach ($stmt as $row) {
+						$returnArray[] = $row;
+					}
+					return $returnArray;
+				}
 			}
 			else {
 				//TODO: Logga errore
@@ -36,6 +43,8 @@ class PDFDatabase
 			
 		}
 	}
+	
+	
 	
 	
 }

@@ -6,14 +6,16 @@
 	include('library/class.CombatManager.php');
 	include('library/class.LogManager.php');
 	include('library/class.UnitManager.php');
+	include('library/class.PDODatabase.php');
 	
-	$uManager = new UnitManager();
+	$db = new PDFDatabase();
+	$db->connect("root", "", "spq_risk", "localhost:3306");
+	$data = $db->query("SELECT * FROM spq_risk_turn_phase_name", null);
+	
+	$xml = simplexml_load_file('./db/cards.xml');
 	
 	echo '<pre>';
-	for ($i = 1;$i<25;$i++){
-		echo $i.': '.$uManager->startLegionary($i);
-		echo '<br>';
-	}
+	echo (trim($xml->sql[0]));
 	echo '</pre>';
 
 
