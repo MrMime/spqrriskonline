@@ -13,6 +13,9 @@ class CardsManager {
 		$this->_grimoryBase[Cards.SHIP] 		= 10;
 	}
 	
+	/**
+	 * Build Startup Grimory
+	 */
 	public function makeStartupGrimory(){
 		$grimory = $this->_grimoryBase;
 		$i = 0;
@@ -45,7 +48,6 @@ class CardsManager {
 	
 	
 	/**
-	 * 
 	 * Translate 3 cards in relative units 
 	 * @param array of CARDS $tris 
 	 * @return array of units [0] terran unit; [1] naval unit; [2] coliseum

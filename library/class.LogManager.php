@@ -3,8 +3,11 @@
 
 class LogManager
 {
-	
 	protected $_log = array();
+	
+	public function __construct(){
+		
+	}
 
 	public function addLog($text){
 		$this->_log[] = $text;
