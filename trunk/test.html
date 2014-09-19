@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <title>F-1 Feeder</title>
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <script type="text/javascript" src="angular.min.js"></script>  
+  <script src="controllers.js"></script>
+  <script src="app.js"></script>  
+</head>
+
+<body ng-app="PlayersModule" ng-controller="playerController">
+  <table>
+    <thead>
+      <tr><th colspan="4">Player</th></tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="player in playerList">        
+        <td>          
+          {{player.nickName}}&nbsp;{{player.points}}
+        </td>        
+        <td>{{player.cards}}</td>
+      </tr>
+    </tbody>
+  </table> 
+</body>
+</html>
