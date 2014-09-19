@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<query>
+	<allUsers>
+		SELECT * FROM spq_risk_users ORDER BY username asc
+	</allUsers>
+</query>
