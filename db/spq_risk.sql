@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generato il: Set 20, 2014 alle 13:07
+-- Generato il: Set 21, 2014 alle 20:46
 -- Versione del server: 5.5.20-log
 -- Versione PHP: 5.3.9
 
@@ -60,9 +60,16 @@ CREATE TABLE IF NOT EXISTS `spq_risk_game` (
   `game_max_point` int(11) NOT NULL,
   `game_turn_number` int(11) NOT NULL,
   `id_lang` int(11) NOT NULL,
-  `id_user_winner` int(11) NOT NULL,
+  `id_user_winner` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_game`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=2 ;
+
+--
+-- Dump dei dati per la tabella `spq_risk_game`
+--
+
+INSERT INTO `spq_risk_game` (`id_game`, `game_name`, `game_creation_date`, `id_user_current_turn`, `game_max_point`, `game_turn_number`, `id_lang`, `id_user_winner`) VALUES
+(1, 'PrimoGioco', '2014-09-21', 1, 20, 1, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -109,6 +116,13 @@ CREATE TABLE IF NOT EXISTS `spq_risk_game_phase` (
   `id_game_phase` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
+--
+-- Dump dei dati per la tabella `spq_risk_game_phase`
+--
+
+INSERT INTO `spq_risk_game_phase` (`id_game`, `id_game_phase`) VALUES
+(1, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -150,16 +164,23 @@ CREATE TABLE IF NOT EXISTS `spq_risk_game_point` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `spq_risk_game_turn_fase`
+-- Struttura della tabella `spq_risk_game_turn_phase`
 --
 
-DROP TABLE IF EXISTS `spq_risk_game_turn_fase`;
-CREATE TABLE IF NOT EXISTS `spq_risk_game_turn_fase` (
+DROP TABLE IF EXISTS `spq_risk_game_turn_phase`;
+CREATE TABLE IF NOT EXISTS `spq_risk_game_turn_phase` (
   `id_game` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `id_game_phase` int(11) NOT NULL,
   `id_turn_phase` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dump dei dati per la tabella `spq_risk_game_turn_phase`
+--
+
+INSERT INTO `spq_risk_game_turn_phase` (`id_game`, `id_user`, `id_game_phase`, `id_turn_phase`) VALUES
+(1, 2, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -290,7 +311,17 @@ CREATE TABLE IF NOT EXISTS `spq_risk_user` (
   `user_password` varchar(250) COLLATE utf8_bin NOT NULL,
   `user_rank` int(11) NOT NULL,
   PRIMARY KEY (`id_user`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=5 ;
+
+--
+-- Dump dei dati per la tabella `spq_risk_user`
+--
+
+INSERT INTO `spq_risk_user` (`id_user`, `user_name`, `user_password`, `user_rank`) VALUES
+(1, 'MrMime', 'ciao', 1),
+(2, 'Maunz', 'maunz', 1),
+(3, 'andry', 'andry', 1),
+(4, 'Pablo', 'pablo', 1);
 
 -- --------------------------------------------------------
 
