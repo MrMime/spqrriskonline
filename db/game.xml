@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <query>
-	<allGames>
-			
-	</allGames>
+	<currentGamePhase>
+		SELECT * FROM spq_risk_game_phase_name PN
+		JOIN spq_risk_game_phase GP ON (GP.ID_GAME_PHASE = PN.ID_PHASE)
+		WHERE GP.ID_GAME = :id_game		
+	</currentGamePhase>
 </query>
