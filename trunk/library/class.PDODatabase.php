@@ -42,9 +42,7 @@ class PDFDatabase
 				}
 				if (preg_match('/^SELECT/',$query)){
 					$returnArray = array();
-					foreach ($stmt as $row) {
-						$returnArray[] = $row;
-					}
+					$returnArray = $stmt->fetchAll(PDO::FETCH_ASSOC);
 					return $returnArray;
 				}
 			}

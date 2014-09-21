@@ -20,6 +20,13 @@ class GameManager
 		return $this->_result;
 	}
 	
+	function currentGameUserPhase($idGame){
+		$query = trim($this->_xml->currentGameUserPhase);
+		$parameters = array('id_game'=>1);
+		$this->_result = $this->_db->query($query,$parameters);
+		return $this->_result;
+	}
+	
 	function currentGamePhaseUser($idGame){
 		
 	}

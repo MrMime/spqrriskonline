@@ -5,4 +5,9 @@
 		JOIN spq_risk_game_phase GP ON (GP.ID_GAME_PHASE = PN.ID_PHASE)
 		WHERE GP.ID_GAME = :id_game		
 	</currentGamePhase>
+	<currentGameUserPhase>
+		SELECT * FROM spq_risk_game_turn_phase TP
+		JOIN spq_risk_user UU ON (UU.ID_USER = TP.ID_USER)
+		WHERE TP.ID_GAME = :id_game		
+	</currentGameUserPhase>
 </query>
