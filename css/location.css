@@ -1,0 +1,63 @@
+DIV.map {
+	width:990px;
+	height:554px;
+	position:relative;
+	background-image:url('../grafica/plancia.png');	
+	background-repeat: no-repeat;
+    background-position: left;
+}
+
+.legionary, .coliseum, .ship {
+	width:57px;
+	height:51px;
+	position:absolute;
+	cursor:pointer;
+	background-repeat:no-repeat;
+	border: 2px solid yellow;
+}
+
+/** Locazioni  **/
+.britishLegionary {
+	top:42px;
+	left:43px;	
+}
+
+.britishColiseum {
+	left:93px;
+	top:11px;
+}
+
+.lugdunenseShip {
+	left:9px;
+	top:75px;	
+}
+
+/** BLACK **/
+.shipUniqueBlack {
+	background-image:url('./images/unit/black/ship.png');	
+}
+
+.legionarySingleBlack {
+	background-image:url('./images/unit/black/unit.png');	
+}
+
+.legionaryTwoBlack{
+	background-image:url('./images/unit/black/2unit.png');	
+}
+
+.legionaryThreeBlack{
+	background-image:url('./images/unit/black/3unit.png');	
+}
+
+.legionaryOverBlack{
+	background-image:url('./images/unit/black/4over.png');	
+}
+
+.coliseumUniqueBlack {
+	background-image:url('./images/unit/black/coliseum.png');	
+}
+
+.shipUniqueBlack {
+	background-image:url('./images/unit/black/ship.png');	
+}
+
