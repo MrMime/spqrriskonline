@@ -191,6 +191,10 @@ INSERT INTO spq_risk_location (id_location_group, location_type, location_name, 
 INSERT INTO spq_risk_location (id_location_group, location_type, location_name, location_label) VALUES (null, '1', 'Narbonense', 'narbonenseLegionary');
 INSERT INTO spq_risk_location (id_location_group, location_type, location_name, location_label) VALUES ('5', '2', 'Insulis maris', 'narbonenseSea');
 INSERT INTO spq_risk_location (id_location_group, location_type, location_name, location_label) VALUES (null, '3', 'Narbonense Interna', 'narbonenseColiseum');
+-- Galazia --
+INSERT INTO spq_risk_location (id_location_group, location_type, location_name, location_label) VALUES (null, '1', 'Galazia', 'galaziaLegionary');
+INSERT INTO spq_risk_location (id_location_group, location_type, location_name, location_label) VALUES (null, '3', 'Galazia Interna', 'galaziaColiseum');
+
 -- Update Nomi --
 UPDATE SPQ_RISK_LOCATION SET LOCATION_NAME = 'Mare Septemtrio' WHERE ID_LOCATION_GROUP = 1;
 UPDATE SPQ_RISK_LOCATION SET LOCATION_NAME = 'Mare Atlantic' WHERE ID_LOCATION_GROUP = 2;
