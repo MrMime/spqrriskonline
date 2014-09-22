@@ -15,13 +15,18 @@ DIV.map {
 	background-repeat:no-repeat;
 }
 
+.legionary:hover, .coliseum:hover, .ship:hover{
+	opacity: 0.4;
+    filter: alpha(opacity=40);
+}
+
 /** Locazioni  **/
-.britishLegionary {
+.britanniaLegionary {
 	top:42px;
 	left:43px;	
 }
 
-.britishColiseum {
+.britanniaColiseum {
 	left:93px;
 	top:11px;
 }
