@@ -13,7 +13,6 @@ DIV.map {
 	position:absolute;
 	cursor:pointer;
 	background-repeat:no-repeat;
-	border: 2px solid yellow;
 }
 
 /** Locazioni  **/
@@ -34,30 +33,30 @@ DIV.map {
 
 /** BLACK **/
 .shipUniqueBlack {
-	background-image:url('./images/unit/black/ship.png');	
+	background-image:url('../images/unit/black/ship.png');	
 }
 
 .legionarySingleBlack {
-	background-image:url('./images/unit/black/unit.png');	
+	background-image:url('../images/unit/black/unit.png');	
 }
 
 .legionaryTwoBlack{
-	background-image:url('./images/unit/black/2unit.png');	
+	background-image:url('../images/unit/black/2unit.png');	
 }
 
 .legionaryThreeBlack{
-	background-image:url('./images/unit/black/3unit.png');	
+	background-image:url('../images/unit/black/3unit.png');	
 }
 
 .legionaryOverBlack{
-	background-image:url('./images/unit/black/4over.png');	
+	background-image:url('../images/unit/black/4over.png');	
 }
 
 .coliseumUniqueBlack {
-	background-image:url('./images/unit/black/coliseum.png');	
+	background-image:url('../images/unit/black/coliseum.png');	
 }
 
 .shipUniqueBlack {
-	background-image:url('./images/unit/black/ship.png');	
+	background-image:url('../images/unit/black/ship.png');	
 }
 
