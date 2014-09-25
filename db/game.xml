@@ -10,4 +10,5 @@
 		JOIN spq_risk_user UU ON (UU.ID_USER = TP.ID_USER)
 		WHERE TP.ID_GAME = :id_game		
 	</currentGameUserPhase>
+	
 </query>

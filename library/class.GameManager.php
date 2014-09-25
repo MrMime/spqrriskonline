@@ -1,16 +1,11 @@
 <?php
 
 
-class GameManager 
+class GameManager extends AbstractGenericManager
 {
-	protected $_xml 	= null;
-	protected $_result 	= null;
-	protected $_db		= null;
-	
 	function __construct(){
-		global $db;
+		parent::__construct();
 		$this->_xml = simplexml_load_file('./db/game.xml');
-		$this->_db = $db;
 	}
 	
 	function currentGamePhase($idGame){
@@ -27,9 +22,6 @@ class GameManager
 		return $this->_result;
 	}
 	
-	function currentGamePhaseUser($idGame){
-		
-	}
 	
 	
 }
