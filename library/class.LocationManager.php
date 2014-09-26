@@ -6,16 +6,19 @@ class LocationManager extends AbstractGenericManager
 	
 	public function __construct(){
 		parent::__construct();
-		$this->_xml = simplexml_load_file('./db/location.xml');
+		$this->_xml = simplexml_load_file('./db/locations.xml');
 	}
 	
 	
-	public function countTotalUserTerritory($idUser,$idGame,$locationType){
+	public function countTotalUserTerritory($idGame,$idUser,$locationType){
 		$query = trim($this->_xml->countUserTotalLocation);
-		$parameters = array('id_game'=>$idGame);
-		$parameters = array('id_user'=>$idUser);
-		$parameters = array('location_type'=>$locationType);
-		$this->_result = $this->_db->query($query,$parameters);
+		$query .= $this->_commonXml->where;
+		$query .= $this->_commonXml->filterByUser;
+		$query .= $this->_commonXml->filterByGame;
+		$query .= $this->_xml->filterByLocationType;
+		
+		$parameters = array('id_game'=>$idGame,'id_user'=>$idUser,'location_type'=>$locationType);
+		$this->_result = self::query($query,$parameters);
 		return $this->_result;
 	}
 	
@@ -38,10 +41,15 @@ class LocationManager extends AbstractGenericManager
 	}
 	
 	public function allUserLocationNoIsolation($idGame,$idUser){
-		$query = trim($this->_xml->allUserLocationNoIsolation);
-		$parameters = array('id_game'=>$idGame);
-		$parameters = array('id_user'=>$idUser);
-		$this->_result = $this->_db->query($query,$parameters);
+		$query = trim($this->_xml->allUserLocation);
+		$query .= $this->_commonXml->where;
+		$query .= $this->_commonXml->filterByUser;
+		$query .= $this->_commonXml->filterByGame;
+		$query .= $this->_xml->filterLocation;
+		$parameters['id_game'] = $idGame;
+		$parameters['id_user'] = $idUser;
+		$parameters['id_locations'] = '100,4500,4200,4300,4100,2700,2600'; //isolated location
+		$this->_result = self::query($query,$parameters);
 		return $this->_result;
 	}
 	
