@@ -8,10 +8,13 @@ Abstract class AbstractGenericManager
 	protected $_result 	= null;
 	protected $_db		= null;
 	
+	protected $_gameManager = null;
+	
 	public function __construct(){
-		global $db;
+		global $db, $gameManager;
 		$this->_db = $db;
 		$this->_commonXml = simplexml_load_file('./db/common.xml');
+		$this->_gameManager = $gameManager;
 	}
 	
 	protected function query($query,$parameters){

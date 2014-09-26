@@ -11,4 +11,9 @@
 		WHERE TP.ID_GAME = :id_game		
 	</currentGameUserPhase>
 	
+	<allGameUser>
+		SELECT UU.* FROM spq_risk_user UU
+		JOIN spq_risk_game_user UD on (UD.ID_USER = UU.ID_USER)
+	</allGameUser>
+	
 </query>

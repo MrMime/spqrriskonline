@@ -16,12 +16,15 @@
 	$GLOBALS['db'] = $db;
 	
 	$gManager = new GameManager();
+	$GLOBALS['gameManager'] = $gManager;
+	
 	$lManager = new LocationManager();
 	
 	echo '<pre>';
-	print_r ($lManager->allUserLocationNoIsolation(1,1));
-	print_r ($lManager->allUserLocationNoIsolation(1,2));
-	print_r ($lManager->allUserLocationNoIsolation(1,3));
+	print_r ($lManager->countAllCloseTerritory(1));
+//	print_r ($lManager->allUserLocations(1,1));
+//	print_r ($lManager->allUserLocations(1,2));
+//	print_r ($lManager->allUserLocations(1,3));
 	echo '</pre>';
 
 

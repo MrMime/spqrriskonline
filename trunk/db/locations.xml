@@ -16,6 +16,8 @@
 		WHERE 
 			LC.ID_LOCATION = :id_location
 			AND
+			LC.CONNECTION_TYPE = :connection_type
+			AND
 			LC.ID_LOCATION_CONNECTED IN (SELECT ID_LOCATION FROM spq_risk_unit_disposition UD WHERE UD.ID_GAME = :id_game AND UD.ID_USER = :id_user)
 	</allLocationConnected>
 	
