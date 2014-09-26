@@ -1,48 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <query>
 	<countUserTotalLocation>
-		SELECT COUNT(*) FROM spq_risk_unit_disposition UD
-		JOIN spq_risk_location LO ON (LO.ID_LOCATION = UD.ID_LOCATION)
-		WHERE 
-		UD.ID_GAME = :id_game
-			AND
-		UD.ID_USER = :id_user
-			AND
-		LO.LOCATION_TYPE = :location_type
+		SELECT COUNT(*) as totale FROM spq_risk_unit_disposition as UD
+		JOIN spq_risk_location as LO ON (LO.ID_LOCATION = UD.ID_LOCATION)
 	</countUserTotalLocation>
 	
-	<allUserLocationNoIsolation>
-		SELECT * FROM spq_risk_unit_disposition UD
-		JOIN spq_risk_location LO ON (LO.ID_LOCATION = UD.ID_LOCATION)
-		WHERE 
-		UD.ID_GAME = :id_game
-			AND
-		UD.ID_USER = :id_user
-			AND 
-			id_location NOT IN (100)
-	</allUserLocationNoIsolation>
-	
 	<allUserLocation>
-		SELECT * FROM spq_risk_unit_dispositionUD
-		JOIN spq_risk_location LO ON (LO.ID_LOCATION = UD.ID_LOCATION)
-		WHERE 
-		UD.ID_GAME = :id_game
-			AND
-		UD.ID_USER = :id_user
+		SELECT * FROM spq_risk_unit_disposition as UD
+		JOIN spq_risk_location as LO ON (LO.ID_LOCATION = UD.ID_LOCATION)
 	</allUserLocation>
 	
 	<allLocationConnected>
-		SELECT LO.* FROM spq_risk_location_connection LC 
-		JOIN spq_risk_location LO ON (LO.ID_LOCATION = LC.ID_LOCATION_CONNECTED)
+		SELECT LO.* FROM spq_risk_location_connection as LC 
+		JOIN spq_risk_location as LO ON (LO.ID_LOCATION = LC.ID_LOCATION_CONNECTED)
 		WHERE 
 			LC.ID_LOCATION = :id_location
 			AND
 			LC.ID_LOCATION_CONNECTED IN (SELECT ID_LOCATION FROM spq_risk_unit_disposition UD WHERE UD.ID_GAME = :id_game AND UD.ID_USER = :id_user)
 	</allLocationConnected>
 	
-	<allFilteredLocationConnected>
+	<!-- GESTIONE FILTRI -->
 	
+	<filterByLocationType>
+		AND LO.LOCATION_TYPE = :location_type
+	</filterByLocationType>
 	
-	</allFilteredLocationConnected>
+	<filterLocation>
+		AND LO.id_location NOT IN (:id_locations)
+	</filterLocation>
+	
 	
 </query>
