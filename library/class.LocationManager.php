@@ -22,25 +22,52 @@ class LocationManager extends AbstractGenericManager
 		return $this->_result;
 	}
 	
-	public function countAllCloseTerritory($idGame){
-		
-		$allUser = tuttiIGiocatori($idGame);
-		$userLocation = array();
-		
-		foreach ($allUser as $user){
-			$allUserLocation = self::allUserLocationNoIsolation($idGame,$idUser);
-
-			foreach ($allUserLocation as $location){
-				//$userLocation[$location['id_location']] = array_merge(array($location->get('id_location')),self::__navigateFromPlace()
-				
-				
-			}
-			
-			
-		}
+	public function allTerritoryConnected($idGame,$idUser,$idLocation,$connectionType){
+		$query = trim($this->_xml->allLocationConnected);
+		$parameters['id_game'] = $idGame;
+		$parameters['id_user'] = $idUser;
+		$parameters['id_location'] = $idLocation;
+		$parameters['connection_type'] = $connectionType;
+		return self::query($query,$parameters);
 	}
 	
-	public function allUserLocationNoIsolation($idGame,$idUser){
+	public function countAllCloseTerritory($idGame){
+		
+		$allUser = $this->_gameManager->allGameUsers(1);
+//		$userLocation = array();
+//		
+		foreach ($allUser as $user){
+			$allUserLocation = self::allUserLocationsNoIsolation($idGame,$user['id_user']);
+			echo '<br><br>UTENTE '.$user['user_name'].'<br>';
+			foreach ($allUserLocation as $location){
+				echo 'LUOGO '.$location['location_name'].'<br>';
+				print_r (self::allTerritoryConnected($idGame,$user['id_user'],$location['id_location'],1));
+			}
+			
+		}
+//
+//			foreach ($allUserLocation as $location){
+//				//$userLocation[$location['id_location']] = array_merge(array($location->get('id_location')),self::__navigateFromPlace()
+//				
+//				
+//			}
+//			
+//			
+//		}
+	}
+	
+	public function allUserLocations($idGame,$idUser){
+		$query = trim($this->_xml->allUserLocation);
+		$query .= $this->_commonXml->where;
+		$query .= $this->_commonXml->filterByUser;
+		$query .= $this->_commonXml->filterByGame;
+		$parameters['id_game'] = $idGame;
+		$parameters['id_user'] = $idUser;
+		$this->_result = self::query($query,$parameters);
+		return $this->_result;
+	}
+	
+	public function allUserLocationsNoIsolation($idGame,$idUser){
 		$query = trim($this->_xml->allUserLocation);
 		$query .= $this->_commonXml->where;
 		$query .= $this->_commonXml->filterByUser;

@@ -2,9 +2,11 @@
 <query>
 	
 	<where> WHERE 1=1 </where>
+	
 	<filterByGame> 
 		AND UD.ID_GAME = :id_game 
 	</filterByGame>
+	
 	<filterByUser> 
 		AND UD.ID_USER = :id_user 
 	</filterByUser>
