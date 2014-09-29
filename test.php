@@ -21,7 +21,7 @@
 	$lManager = new LocationManager();
 	
 	echo '<pre>';
-	print_r ($lManager->countAllCloseTerritory(1));
+	print_r ($lManager->countPlayerNavalTerritory(1));
 //	print_r ($lManager->allUserLocations(1,1));
 //	print_r ($lManager->allUserLocations(1,2));
 //	print_r ($lManager->allUserLocations(1,3));
