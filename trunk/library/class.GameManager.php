@@ -32,4 +32,22 @@ class GameManager extends AbstractGenericManager
 	
 	
 	
+	function countIniRoundUserPoint($idGame,$idUser){
+		$points = 0;
+		//check if the user is the user with most sea territory
+		$idUserMostNaval = $this->_locationManager->userWithMostSeaTerritory($idGame);
+		if ($idUser == $idUserMostNaval){
+			$points++;
+		}
+		
+		//check how many coliseum has the user
+		$coliseum = $this->_locationManager->countTotalUserTerritory($idGame,$idUser,LocationManager.COLISEUM);
+		$points += (is_null($coliseum)) ? 0 : $coliseum;
+		
+		
+		
+	}
+	
+	
+	
 }
