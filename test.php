@@ -22,9 +22,8 @@
 	
 	echo '<pre>';
 	print_r ($lManager->countPlayerNavalTerritory(1));
-//	print_r ($lManager->allUserLocations(1,1));
-//	print_r ($lManager->allUserLocations(1,2));
-//	print_r ($lManager->allUserLocations(1,3));
+	$idUser = $lManager->userWithMostSeaTerritory(1);
+	echo 'Utente con maggiori territori navali '.(($idUser == null) ? 'nessuno': $idUser);
 	echo '</pre>';
 
 

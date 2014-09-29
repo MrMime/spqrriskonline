@@ -4,6 +4,13 @@
 class LocationManager extends AbstractGenericManager
 {
 	
+	const TERRAN_CONNECTION  	= 1;
+	const SEA_CONNECTION  		= 2;
+	
+	const TERRAN_TERRITORY				= 1;
+	const SEA_TERRITORY					= 2;
+	const COLISEUM_TERRITORY			= 3;
+	
 	public function __construct(){
 		parent::__construct();
 		$this->_xml = simplexml_load_file('./db/locations.xml');
@@ -21,6 +28,12 @@ class LocationManager extends AbstractGenericManager
 		return self::query($query,$parameters);
 	}
 	
+	/**
+	 * Count how many territory has a specific user for a specific gamess
+	 * @param int $idGame
+	 * @param int $idUser
+	 * @param int $locationType
+	 */
 	public function countTotalUserTerritory($idGame,$idUser,$locationType){
 		$query = $this->_xml->countGameTotalLocation;
 		$query .= $this->_commonXml->where;
@@ -33,6 +46,11 @@ class LocationManager extends AbstractGenericManager
 		return $this->_result;
 	}
 	
+	/**
+	 * Check if a user, between all user that has at least
+	 * one ship in a sea territory, has the highest number of ship
+	 * @param array $counts
+	 */
 	private function __checkSeaLocation($counts){
 		arsort($counts);
 		$users = array_keys($counts);
@@ -44,6 +62,12 @@ class LocationManager extends AbstractGenericManager
 		return null;
 	}
 	
+	/**
+	 * Generate an array of user with the number of sea territory
+	 * REMEMBER: A user has a sea territory if its ship are more than other on
+	 * same sea territory
+	 * @param int $idGame
+	 */
 	public function countPlayerNavalTerritory($idGame){
 		$query = $this->_xml->allGameLocation;
 		$query .= $this->_xml->joinSeaLocation;
@@ -67,17 +91,35 @@ class LocationManager extends AbstractGenericManager
 		}
 		
 		return $userSeaLocation;
-		
-//		$allUser = $this->_gameManager->allGameUsers($idGame);
-//		$userLocation = array();
-//		foreach ($allUser as $user){
-//			$allUserLocation = self::allUserLocations($idGame,$user['id_user'],2);
-//			
-//		}
 	}
 	
+	/**
+	 * Return the User with the highest number of sea territory
+	 * @param int $idGame
+	 */
+	public function userWithMostSeaTerritory($idGame){
+		$userSeaLocation = self::countPlayerNavalTerritory($idGame);
+		arsort($userSeaLocation);
+		
+		$users = array_keys($userSeaLocation);
+		$first = array_shift($userSeaLocation);
+		$second = array_shift($userSeaLocation);
+		if ((!is_null($second) && $first > $second) || is_null($second)){
+			return $users[0];
+		}
+		return null;
+	}
+	
+	/**
+	 * Get all territory connect to a specific territory
+	 * for a specific user in a specifica game
+	 * @param int $idGame
+	 * @param int $idUser
+	 * @param int $idLocation
+	 * @param int $connectionType
+	 */
 	public function allTerritoryConnected($idGame,$idUser,$idLocation,$connectionType){
-		$query = trim($this->_xml->allLocationConnected);
+		$query = $this->_xml->allLocationConnected;
 		$parameters['id_game'] = $idGame;
 		$parameters['id_user'] = $idUser;
 		$parameters['id_location'] = $idLocation;
@@ -85,6 +127,10 @@ class LocationManager extends AbstractGenericManager
 		return self::query($query,$parameters);
 	}
 	
+	/**
+	 * Count max number of connected territory for any users 
+	 * @param int $idGame
+	 */
 	public function countAllCloseTerritory($idGame){
 		$allUser = $this->_gameManager->allGameUsers($idGame);
 		$userLocation = array();
@@ -94,12 +140,18 @@ class LocationManager extends AbstractGenericManager
 			$userLocation[$user['id_user']] = 0;
 			foreach ($allUserLocation as $location){
 				//echo 'LUOGO '.$location['location_name'].'<br>';
-				$userLocation[$user['id_user']] = max($userLocation[$user['id_user']],1+count(self::allTerritoryConnected($idGame,$user['id_user'],$location['id_location'],1)));
+				$userLocation[$user['id_user']] = max($userLocation[$user['id_user']],1+count(self::allTerritoryConnected($idGame,$user['id_user'],$location['id_location'],TERRAN_CONNECTION)));
 			}
 		}
 		return $userLocation;
 	}
 	
+	/**
+	 * Get all user location filtered by location type
+	 * @param int $idGame
+	 * @param int $idUser
+	 * @param int $locationType
+	 */
 	public function allUserLocations($idGame,$idUser,$locationType = null){
 		$query = trim($this->_xml->allGameLocation);
 		$query .= $this->_commonXml->where;
@@ -115,6 +167,12 @@ class LocationManager extends AbstractGenericManager
 		return $this->_result;
 	}
 	
+	
+	/**
+	 * Get all user terran location without islands
+	 * @param int $idGame
+	 * @param int $idUser
+	 */
 	public function allUserLocationsNoIsolation($idGame,$idUser){
 		$query = trim($this->_xml->allGameLocation);
 		$query .= $this->_commonXml->where;
