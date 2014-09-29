@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <query>
-	<countUserTotalLocation>
+	<countGameTotalLocation>
 		SELECT COUNT(*) as totale FROM spq_risk_unit_disposition as UD
 		JOIN spq_risk_location as LO ON (LO.ID_LOCATION = UD.ID_LOCATION)
-	</countUserTotalLocation>
+	</countGameTotalLocation>
 	
-	<allUserLocation>
+	<allGameLocation>
 		SELECT * FROM spq_risk_unit_disposition as UD
 		JOIN spq_risk_location as LO ON (LO.ID_LOCATION = UD.ID_LOCATION)
-	</allUserLocation>
+	</allGameLocation>
+	
+	<joinSeaLocation>
+		JOIN spq_risk_sea_location SL on (SL.ID_SEA_LOCATION = LO.ID_LOCATION_GROUP)
+	</joinSeaLocation>
+	
+	<orderBySeaLocation>
+		ORDER BY SL.ID_SEA_LOCATION ASC
+	</orderBySeaLocation>
 	
 	<allLocationConnected>
 		SELECT LO.* FROM spq_risk_location_connection as LC 
