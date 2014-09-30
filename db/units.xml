@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<query>
+	
+	<addUnitToTerritory>
+		INSERT INTO spq_risk_unit_disposition VALUES
+		(
+			:id_game , 
+			:id_user , 
+			:id_location , 
+			:unit_number
+		)
+		ON DUPLICATE KEY UPDATE units = units +	:unit_number
+	</addUnitToTerritory>
+	
+</query>

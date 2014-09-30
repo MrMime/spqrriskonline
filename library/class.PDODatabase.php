@@ -37,7 +37,7 @@ class PDFDatabase
 		try {
 			if ($stmt->execute($parameters)){
 				if (preg_match('/^INSERT/',$query)){
-					$this->_lastId = $pdo_interface->lastInsertId();
+					$this->_lastId = $this->_pdo_interface->lastInsertId();
 					return $this->_lastId;
 				}
 				if (preg_match('/^SELECT/',$query)){
