@@ -12,11 +12,9 @@ Abstract class AbstractGenericManager
 	protected $_locationManager = null;
 	
 	public function __construct(){
-		global $db, $gameManager,$locationManager;
+		global $db;
 		$this->_db = $db;
 		$this->_commonXml = simplexml_load_file('./db/common.xml');
-		$this->_gameManager = $gameManager;
-		$this->_locationManager = $locationManager;
 	}
 	
 	protected function query($query,$parameters){

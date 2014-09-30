@@ -11,4 +11,17 @@
 		AND UD.ID_USER = :id_user 
 	</filterByUser>
 	
+	
+	<orderByCount>
+		ORDER BY COUNT( * )
+	</orderByCount>
+	
+	<desc>
+		DESC
+	</desc>
+	
+	<asc>
+		ASC
+	</asc>
+	
 </query>

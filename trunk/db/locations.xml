@@ -5,6 +5,15 @@
 		JOIN spq_risk_location as LO ON (LO.ID_LOCATION = UD.ID_LOCATION)
 	</countGameTotalLocation>
 	
+	<countAllUsersLocation>
+		SELECT id_user, COUNT( * ) as total
+		FROM  spq_risk_unit_disposition UD
+		JOIN spq_risk_location as LO ON (LO.ID_LOCATION = UD.ID_LOCATION)
+		{where}
+		GROUP BY id_user
+		ORDER BY COUNT( * ) DESC
+	</countAllUsersLocation>
+	
 	<allGameLocation>
 		SELECT * FROM spq_risk_unit_disposition as UD
 		JOIN spq_risk_location as LO ON (LO.ID_LOCATION = UD.ID_LOCATION)
