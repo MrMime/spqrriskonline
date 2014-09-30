@@ -4,8 +4,10 @@
 class GameManager extends AbstractGenericManager
 {
 	function __construct(){
+		global $locationManager;
 		parent::__construct();
 		$this->_xml = simplexml_load_file('./db/game.xml');
+		$this->_locationManager = $locationManager;
 	}
 	
 	function currentGamePhase($idGame){
@@ -44,8 +46,12 @@ class GameManager extends AbstractGenericManager
 		$coliseum = $this->_locationManager->countTotalUserTerritory($idGame,$idUser,LocationManager.COLISEUM);
 		$points += (is_null($coliseum)) ? 0 : $coliseum;
 		
+		$idUserMostTerritory = $this->_locationManager->userWithMostTerranTerritory($idGame);
+		if ($idUser == $idUserMostNaval){
+			$points++;
+		}
 		
-		
+		return $points;
 	}
 	
 	

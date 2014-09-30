@@ -28,22 +28,35 @@ class LocationManager extends AbstractGenericManager
 		return self::query($query,$parameters);
 	}
 	
+	public function countUserLocation($idGame,$locationType = 1){
+		$query = $this->_xml->countAllUsersLocation;
+		$where =  $this->_commonXml->where;
+		$where .= $this->_commonXml->filterByGame;
+		$where .= $this->_xml->filterByLocationType;
+		
+		$parameters['id_game'] = $idGame;
+		$parameters['location_type'] = $locationType;
+		
+		$query = str_replace('{where}',$where,$query);
+		
+		$this->_result = self::query($query,$parameters);
+		
+		$result = array();
+		foreach ($this->_result as $userCounts){
+			$result[$userCounts['id_user']] = $userCounts['total'];
+		}
+		return $result;
+	}
+	
 	/**
-	 * Count how many territory has a specific user for a specific gamess
+	 * Count how many territory has a specific user for a specific games
 	 * @param int $idGame
 	 * @param int $idUser
 	 * @param int $locationType
 	 */
 	public function countTotalUserTerritory($idGame,$idUser,$locationType){
-		$query = $this->_xml->countGameTotalLocation;
-		$query .= $this->_commonXml->where;
-		$query .= $this->_commonXml->filterByUser;
-		$query .= $this->_commonXml->filterByGame;
-		$query .= $this->_xml->filterByLocationType;
-		
-		$parameters = array('id_game'=>$idGame,'id_user'=>$idUser,'location_type'=>$locationType);
-		$this->_result = self::query($query,$parameters);
-		return $this->_result;
+		$usersTerritory = self::countUserLocation($idGame,$locationType);
+		return $usersTerritory[$idUser];
 	}
 	
 	/**
@@ -110,6 +123,17 @@ class LocationManager extends AbstractGenericManager
 		return null;
 	}
 	
+	public function userWithMostTerranTerritory($idGame){
+		$usersTerritory = self::countUserLocation($idGame,self::TERRAN_TERRITORY);
+		$users = array_keys($usersTerritory);
+		$first = array_shift($usersTerritory);
+		$second = array_shift($usersTerritory);
+		if ($first > $second){
+			return $users[0];
+		}
+		return null;
+	}
+	
 	/**
 	 * Get all territory connect to a specific territory
 	 * for a specific user in a specifica game
@@ -140,7 +164,7 @@ class LocationManager extends AbstractGenericManager
 			$userLocation[$user['id_user']] = 0;
 			foreach ($allUserLocation as $location){
 				//echo 'LUOGO '.$location['location_name'].'<br>';
-				$userLocation[$user['id_user']] = max($userLocation[$user['id_user']],1+count(self::allTerritoryConnected($idGame,$user['id_user'],$location['id_location'],TERRAN_CONNECTION)));
+				$userLocation[$user['id_user']] = max($userLocation[$user['id_user']],1+count(self::allTerritoryConnected($idGame,$user['id_user'],$location['id_location'],self::TERRAN_CONNECTION)));
 			}
 		}
 		return $userLocation;

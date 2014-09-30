@@ -15,15 +15,16 @@
 	$db->connect("root", "", "spq_risk", "localhost:3306");
 	$GLOBALS['db'] = $db;
 	
+	$lManager = new LocationManager();
+	$GLOBALS['locationManager'] = $lManager;
+	
 	$gManager = new GameManager();
 	$GLOBALS['gameManager'] = $gManager;
 	
-	$lManager = new LocationManager();
+	
 	
 	echo '<pre>';
-	print_r ($lManager->countPlayerNavalTerritory(1));
-	$idUser = $lManager->userWithMostSeaTerritory(1);
-	echo 'Utente con maggiori territori navali '.(($idUser == null) ? 'nessuno': $idUser);
+	print_r ($gManager->countIniRoundUserPoint(1,1));
 	echo '</pre>';
 
 
