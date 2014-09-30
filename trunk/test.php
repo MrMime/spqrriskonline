@@ -21,10 +21,10 @@
 	$gManager = new GameManager();
 	$GLOBALS['gameManager'] = $gManager;
 	
-	
+	$uManager = new UnitManager();
 	
 	echo '<pre>';
-	print_r ($gManager->countIniRoundUserPoint(1,1));
+	$uManager->addUnitsToTerritory(1, 3, 1400,-5);
 	echo '</pre>';
 
 
