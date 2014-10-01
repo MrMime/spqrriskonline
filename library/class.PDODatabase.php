@@ -53,6 +53,8 @@ class PDFDatabase
  			print ("<h3>ERROR STACK TRACE</h3>");
  			print ("<b>query: ".$query." (CODE: ". $stmt->errorCode() .")</b><br />");
  			print_r($stmt->errorInfo());
+ 			print ("<br>Parameters<br>");
+ 			print_r($parameters);
  			print ("</pre>");
  			
  			for ($i = 0; $i < count($errarray); $i++) {
