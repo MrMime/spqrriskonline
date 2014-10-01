@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generato il: Set 23, 2014 alle 17:19
+-- Generato il: Ott 01, 2014 alle 17:43
 -- Versione del server: 5.5.27-log
 -- Versione PHP: 5.4.6
 
@@ -43,13 +43,20 @@ CREATE TABLE IF NOT EXISTS `spq_risk_game` (
   `id_game` int(11) NOT NULL AUTO_INCREMENT,
   `game_name` varchar(250) COLLATE utf8_bin NOT NULL,
   `game_creation_date` date NOT NULL,
-  `id_user_current_turn` int(11) NOT NULL,
+  `id_user_current_turn` int(11) DEFAULT NULL,
   `game_max_point` int(11) NOT NULL,
   `game_turn_number` int(11) NOT NULL,
   `id_lang` int(11) NOT NULL,
-  `id_user_winner` int(11) NOT NULL,
+  `id_user_winner` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_game`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=335 ;
+
+--
+-- Dump dei dati per la tabella `spq_risk_game`
+--
+
+INSERT INTO `spq_risk_game` (`id_game`, `game_name`, `game_creation_date`, `id_user_current_turn`, `game_max_point`, `game_turn_number`, `id_lang`, `id_user_winner`) VALUES
+(334, 'Test 1', '2014-09-26', 1, 25, 1, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -100,11 +107,11 @@ CREATE TABLE IF NOT EXISTS `spq_risk_game_point` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `spq_risk_game_turn_fase`
+-- Struttura della tabella `spq_risk_game_turn_phase`
 --
 
-DROP TABLE IF EXISTS `spq_risk_game_turn_fase`;
-CREATE TABLE IF NOT EXISTS `spq_risk_game_turn_fase` (
+DROP TABLE IF EXISTS `spq_risk_game_turn_phase`;
+CREATE TABLE IF NOT EXISTS `spq_risk_game_turn_phase` (
   `id_game` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `id_turn_phase` int(11) NOT NULL
@@ -120,8 +127,19 @@ DROP TABLE IF EXISTS `spq_risk_game_user`;
 CREATE TABLE IF NOT EXISTS `spq_risk_game_user` (
   `id_game` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
-  `id_color` int(11) NOT NULL
+  `id_color` int(11) NOT NULL,
+  PRIMARY KEY (`id_game`,`id_user`),
+  UNIQUE KEY `id_game` (`id_game`,`id_user`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dump dei dati per la tabella `spq_risk_game_user`
+--
+
+INSERT INTO `spq_risk_game_user` (`id_game`, `id_user`, `id_color`) VALUES
+(334, 1001, 1),
+(334, 1200, 2),
+(334, 3900, 3);
 
 -- --------------------------------------------------------
 
@@ -251,6 +269,8 @@ INSERT INTO `spq_risk_location` (`id_location`, `id_location_group`, `location_t
 (2601, NULL, 3, 'Cipro Interna', 'ciproColiseum'),
 (2602, 10, 2, 'Cipro Mare', 'ciproSea'),
 (2603, 11, 2, 'Cipro Mare', 'ciproSea'),
+(2700, NULL, 1, 'Creta', 'cretaLegionary'),
+(2701, NULL, 3, 'Creta Interna', 'cretaColiseum'),
 (2800, NULL, 1, 'Acaia', 'acaiaLegionary'),
 (2801, NULL, 3, 'Acaia Interna', 'acaiaColiseum'),
 (2802, 11, 2, 'Acaia Mare', 'acaiaSea'),
@@ -325,7 +345,7 @@ DROP TABLE IF EXISTS `spq_risk_location_connection`;
 CREATE TABLE IF NOT EXISTS `spq_risk_location_connection` (
   `id_location` int(11) NOT NULL,
   `id_location_connected` int(11) NOT NULL,
-  `connectio_type` tinyint(4) NOT NULL,
+  `connection_type` tinyint(4) NOT NULL,
   `id_sea_location` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
@@ -333,7 +353,7 @@ CREATE TABLE IF NOT EXISTS `spq_risk_location_connection` (
 -- Dump dei dati per la tabella `spq_risk_location_connection`
 --
 
-INSERT INTO `spq_risk_location_connection` (`id_location`, `id_location_connected`, `connectio_type`, `id_sea_location`) VALUES
+INSERT INTO `spq_risk_location_connection` (`id_location`, `id_location_connected`, `connection_type`, `id_sea_location`) VALUES
 (100, 200, 2, 1),
 (100, 300, 2, 1),
 (100, 400, 2, 1),
@@ -848,10 +868,62 @@ CREATE TABLE IF NOT EXISTS `spq_risk_unit_disposition` (
   `id_game` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `id_location` int(11) NOT NULL,
-  `unit_disposition_legionary` tinyint(4) NOT NULL,
-  `unit_disposition_ship` tinyint(4) NOT NULL,
-  `unit_disposition_coliseum` tinyint(4) NOT NULL
+  `units` tinyint(4) DEFAULT NULL,
+  PRIMARY KEY (`id_game`,`id_user`,`id_location`),
+  KEY `id_user` (`id_user`),
+  KEY `id_location` (`id_location`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dump dei dati per la tabella `spq_risk_unit_disposition`
+--
+
+INSERT INTO `spq_risk_unit_disposition` (`id_game`, `id_user`, `id_location`, `units`) VALUES
+(334, 1001, 100, 3),
+(334, 1001, 200, 2),
+(334, 1001, 300, 3),
+(334, 1001, 1000, 3),
+(334, 1001, 1100, 1),
+(334, 1001, 1200, 2),
+(334, 1001, 1700, 3),
+(334, 1001, 2000, 5),
+(334, 1001, 2400, 6),
+(334, 1001, 3700, 6),
+(334, 1001, 3800, 5),
+(334, 1001, 4000, 6),
+(334, 1001, 4100, 2),
+(334, 1200, 700, 3),
+(334, 1200, 800, 2),
+(334, 1200, 2100, 4),
+(334, 1200, 2200, 3),
+(334, 1200, 2300, 3),
+(334, 1200, 2500, 3),
+(334, 1200, 2600, 3),
+(334, 1200, 2700, 4),
+(334, 1200, 2800, 10),
+(334, 1200, 2900, 9),
+(334, 1200, 3000, 8),
+(334, 1200, 3100, 7),
+(334, 1200, 3200, 6),
+(334, 1200, 3300, 5),
+(334, 1200, 3400, 4),
+(334, 1200, 3500, 4),
+(334, 1200, 3600, 3),
+(334, 1200, 3900, 3),
+(334, 3900, 400, 3),
+(334, 3900, 500, 2),
+(334, 3900, 600, 1),
+(334, 3900, 900, 3),
+(334, 3900, 1300, 5),
+(334, 3900, 1400, 5),
+(334, 3900, 1500, 5),
+(334, 3900, 1600, 5),
+(334, 3900, 1800, 5),
+(334, 3900, 1900, 5),
+(334, 3900, 4200, 5),
+(334, 3900, 4300, 4),
+(334, 3900, 4400, 1),
+(334, 3900, 4500, 4);
 
 -- --------------------------------------------------------
 
@@ -866,7 +938,16 @@ CREATE TABLE IF NOT EXISTS `spq_risk_user` (
   `user_password` varchar(250) COLLATE utf8_bin NOT NULL,
   `user_rank` int(11) NOT NULL,
   PRIMARY KEY (`id_user`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=3901 ;
+
+--
+-- Dump dei dati per la tabella `spq_risk_user`
+--
+
+INSERT INTO `spq_risk_user` (`id_user`, `user_name`, `user_password`, `user_rank`) VALUES
+(1001, 'MrMime', 'ciao', 1),
+(1200, 'andry', 'eqewq', 1),
+(3900, 'Maunz', 'eqw', 1);
 
 -- --------------------------------------------------------
 
@@ -894,6 +975,18 @@ CREATE TABLE IF NOT EXISTS `spq_risk_user_stats` (
   `user_stats_won_games` int(11) NOT NULL,
   `user_stats_lost_games` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Limiti per le tabelle scaricate
+--
+
+--
+-- Limiti per la tabella `spq_risk_unit_disposition`
+--
+ALTER TABLE `spq_risk_unit_disposition`
+  ADD CONSTRAINT `spq_risk_unit_disposition_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `spq_risk_user` (`id_user`),
+  ADD CONSTRAINT `spq_risk_unit_disposition_ibfk_2` FOREIGN KEY (`id_location`) REFERENCES `spq_risk_location` (`id_location`),
+  ADD CONSTRAINT `spq_risk_unit_disposition_ibfk_3` FOREIGN KEY (`id_game`) REFERENCES `spq_risk_game` (`id_game`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
