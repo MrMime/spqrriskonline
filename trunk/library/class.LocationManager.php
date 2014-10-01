@@ -123,6 +123,10 @@ class LocationManager extends AbstractGenericManager
 		return null;
 	}
 	
+	/**
+	 * Return the User with the highest number of terran territory
+	 * @param int $idGame
+	 */
 	public function userWithMostTerranTerritory($idGame){
 		$usersTerritory = self::countUserLocation($idGame,self::TERRAN_TERRITORY);
 		$users = array_keys($usersTerritory);
@@ -155,15 +159,13 @@ class LocationManager extends AbstractGenericManager
 	 * Count max number of connected territory for any users 
 	 * @param int $idGame
 	 */
-	public function countAllCloseTerritory($idGame){
-		$allUser = $this->_gameManager->allGameUsers($idGame);
+	public function countAllCloseTerritory($idGame,$allUser){
 		$userLocation = array();
 		foreach ($allUser as $user){
 			$allUserLocation = self::allUserLocationsNoIsolation($idGame,$user['id_user']);
-			//echo '<br><br>UTENTE '.$user['user_name'].'<br>';
+			print_r ($allUserLocation);
 			$userLocation[$user['id_user']] = 0;
 			foreach ($allUserLocation as $location){
-				//echo 'LUOGO '.$location['location_name'].'<br>';
 				$userLocation[$user['id_user']] = max($userLocation[$user['id_user']],1+count(self::allTerritoryConnected($idGame,$user['id_user'],$location['id_location'],self::TERRAN_CONNECTION)));
 			}
 		}
@@ -202,10 +204,9 @@ class LocationManager extends AbstractGenericManager
 		$query .= $this->_commonXml->where;
 		$query .= $this->_commonXml->filterByUser;
 		$query .= $this->_commonXml->filterByGame;
-		$query .= $this->_xml->filterLocation;
+		$query .= $this->_xml->filterIslandLocation;
 		$parameters['id_game'] = $idGame;
 		$parameters['id_user'] = $idUser;
-		$parameters['id_locations'] = '100,4500,4200,4300,4100,2700,2600'; //isolated location
 		$this->_result = self::query($query,$parameters);
 		return $this->_result;
 	}

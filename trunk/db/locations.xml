@@ -44,9 +44,9 @@
 		AND LO.LOCATION_TYPE = :location_type
 	</filterByLocationType>
 	
-	<filterLocation>
-		AND LO.id_location NOT IN (:id_locations)
-	</filterLocation>
+	<filterIslandLocation>
+		AND LO.id_location NOT IN (4100,4500,4200,4300,100,2700,2600)
+	</filterIslandLocation>
 	
 	
 </query>

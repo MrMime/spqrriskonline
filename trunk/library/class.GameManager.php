@@ -39,7 +39,7 @@ class GameManager extends AbstractGenericManager
 		//check if the user is the user with most sea territory
 		$idUserMostNaval = $this->_locationManager->userWithMostSeaTerritory($idGame);
 		if ($idUser == $idUserMostNaval){
-			$points++;
+			$points+=1;
 		}
 		
 		//check how many coliseum has the user
@@ -47,9 +47,11 @@ class GameManager extends AbstractGenericManager
 		$points += (is_null($coliseum)) ? 0 : $coliseum;
 		
 		$idUserMostTerritory = $this->_locationManager->userWithMostTerranTerritory($idGame);
-		if ($idUser == $idUserMostNaval){
-			$points++;
+		if ($idUser == $idUserMostTerritory){
+			$points+=1;
 		}
+		
+		print_r ($this->_locationManager->countAllCloseTerritory($idGame,self::allGameUsers($idGame)));
 		
 		return $points;
 	}
