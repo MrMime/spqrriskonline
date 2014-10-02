@@ -152,7 +152,26 @@ class LocationManager extends AbstractGenericManager
 		$parameters['id_user'] = $idUser;
 		$parameters['id_location'] = $idLocation;
 		$parameters['connection_type'] = $connectionType;
-		return self::query($query,$parameters);
+		$result = self::query($query,$parameters); 
+		return $result;
+	}
+	
+	private function getNextTerritoryConnected($idGame,$idUser,$idLocationStart,&$idLocationAvoid,$connectionType){
+		$query = $this->_xml->allLocationConnected;
+		$query .= "AND LO.ID_LOCATION NOT IN (".implode (',',$idLocationAvoid).")";
+		$parameters['id_game'] = $idGame;
+		$parameters['id_user'] = $idUser;
+		$parameters['id_location'] = $idLocationStart;
+		$parameters['connection_type'] = $connectionType;
+		$result = self::query($query,$parameters);
+		if (count($result) == 0) return array();
+		foreach ($result as $location) {
+			$idLocationAvoid[] = $location['id_location'];
+		}
+		foreach ($result as $location) {
+			$result = array_merge($result,self::getNextTerritoryConnected($idGame, $idUser, $location['id_location'], $idLocationAvoid, $connectionType));
+		}
+		return $result;
 	}
 	
 	/**
@@ -163,10 +182,14 @@ class LocationManager extends AbstractGenericManager
 		$userLocation = array();
 		foreach ($allUser as $user){
 			$allUserLocation = self::allUserLocationsNoIsolation($idGame,$user['id_user']);
-			print_r ($allUserLocation);
-			$userLocation[$user['id_user']] = 0;
+			$idUser = $user['id_user'];
+			$userLocation[$idUser] = 0;
+			$avoidLocation[$idUser] = array();
 			foreach ($allUserLocation as $location){
-				$userLocation[$user['id_user']] = max($userLocation[$user['id_user']],1+count(self::allTerritoryConnected($idGame,$user['id_user'],$location['id_location'],self::TERRAN_CONNECTION)));
+				if (!in_array($location['id_location'],$avoidLocation[$idUser])){
+					$avoidLocation[$user['id_user']][] = $location['id_location'];
+					$userLocation[$idUser] = max($userLocation[$idUser],1+count(self::getNextTerritoryConnected($idGame,$idUser,$location['id_location'],$avoidLocation[$idUser],self::TERRAN_CONNECTION)));
+				}
 			}
 		}
 		return $userLocation;

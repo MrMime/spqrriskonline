@@ -51,8 +51,14 @@ class GameManager extends AbstractGenericManager
 			$points+=1;
 		}
 		
-		print_r ($this->_locationManager->countAllCloseTerritory($idGame,self::allGameUsers($idGame)));
-		
+		$maxUserTerritoryConnected = $this->_locationManager->countAllCloseTerritory($idGame,self::allGameUsers($idGame));
+		arsort($maxUserTerritoryConnected);
+		$users = array_keys($maxUserTerritoryConnected);
+		$first = array_shift($maxUserTerritoryConnected);
+		$second = array_shift($maxUserTerritoryConnected);
+		if ($first > $second && $users[0] == $idUser){
+			$points+=1;
+		}
 		return $points;
 	}
 	

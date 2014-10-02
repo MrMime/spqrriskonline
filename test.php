@@ -25,6 +25,8 @@
 	
 	echo '<pre>';
 	
+	//print_r ($lManager->countAllCloseTerritory(334,$gManager->allGameUsers(334)));
+	
 	print_r($gManager->countIniRoundUserPoint(334, 1001));
 	
 	print_r($gManager->countIniRoundUserPoint(334, 1200));
