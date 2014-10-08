@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <query>
-	
+
+	<beginTransaction>
+		BEGIN TRANSACTION
+	</beginTransaction>
+		
 	<where> WHERE 1=1 </where>
 	
 	<filterByGame> 

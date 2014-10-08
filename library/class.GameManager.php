@@ -32,8 +32,6 @@ class GameManager extends AbstractGenericManager
 		return self::query($query,$parameters);
 	}
 	
-	
-	
 	function countIniRoundUserPoint($idGame,$idUser){
 		$points = 0;
 		//check if the user is the user with most sea territory
@@ -60,6 +58,12 @@ class GameManager extends AbstractGenericManager
 			$points+=1;
 		}
 		return $points;
+	}
+	
+	
+	function createNewGame($data){
+		
+	
 	}
 	
 	

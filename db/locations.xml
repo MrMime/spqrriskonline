@@ -14,6 +14,10 @@
 		ORDER BY COUNT( * ) DESC
 	</countAllUsersLocation>
 	
+	<allBaseGameLocation>
+		SELECT * FROM spq_risk_location as LO
+	</allBaseGameLocation>
+	
 	<allGameLocation>
 		SELECT * FROM spq_risk_unit_disposition as UD
 		JOIN spq_risk_location as LO ON (LO.ID_LOCATION = UD.ID_LOCATION)
@@ -26,6 +30,15 @@
 	<orderBySeaLocation>
 		ORDER BY SL.ID_SEA_LOCATION ASC
 	</orderBySeaLocation>
+	
+	<orderByIdLocation>
+		ORDER BY LO.ID_LOCATION ASC
+	</orderByIdLocation>
+	
+	<orderByLocationTypeInverse>
+		ORDER BY LO.LOCATION_TYPE DESC, LO.ID_LOCATION ASC
+	</orderByLocationTypeInverse>
+	
 	
 	<allLocationConnected>
 		SELECT LO.* FROM spq_risk_location_connection as LC 

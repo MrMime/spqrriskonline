@@ -16,4 +16,9 @@
 		JOIN spq_risk_game_user UD on (UD.ID_USER = UU.ID_USER)
 	</allGameUser>
 	
+	<insert>
+		INSERT INTO spq_risk_game 
+	
+	</insert>
+	
 </query>
