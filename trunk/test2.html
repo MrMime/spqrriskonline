@@ -1,21 +1,52 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>F-1 Feeder</title>
+  <title>TEST</title>
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="./css/location.css">
   <script type="text/javascript" src="angular.min.js"></script>  
+  <script type="text/javascript" src="jquery-1.5.2.js"></script>
   <script src="controllers.js"></script>
   <script src="app.js"></script>  
+  
+  <script>
+	  var divPos = {};
+	  var clickPos = {};
+	  var offset = {}
+	  $(document).mousemove(function(e){
+	      var $div = $("#mappa");
+	      divPos = {
+	          left: e.pageX - $div.offset().left,
+	          top: e.pageY - $div.offset().top
+	      };	      
+	      $('#coords').val(divPos.left+' X'+ divPos.top+' Y');
+	  });
+
+	
+	$(document).click(function(e){
+		clickPos = divPos;
+		$('#click').val(clickPos.left+' X'+ clickPos.top+' Y');
+		offset = {
+			top : clickPos.top - 23,
+			left : clickPos.left - 23
+		}
+		//var legion = $('<div class="legionary" style="top:'+offset.top+'px;left='.left.'px"></div>'); 
+		var legion = $('<div class="legionary legionarySingleBlack" style="top:'+offset.top+'px;left:'+offset.left+'px;"></div>'); 
+		$('#mappa').append(legion);
+	});
+	  
+  </script>
 </head>
 
 <body ng-app="PlayersModule" ng-controller="playerController">
 	<div style="border:1px solid black;padding-left:250px;">
-	 	<div class="map">
-	 		<div class="coliseum coliseumUniqueBlack britishColiseum"></div>
-	 		<div class="legionary legionaryThreeBlack britishLegionary"></div>
-	 		<div class="ship shipUniqueBlack lugdunenseShip"></div>
+	 	<div id="mappa" class="map">
+<!--	 		<div class="coliseum coliseumUniqueBlack britishColiseum"></div>-->
+<!--	 		<div class="legionary legionaryThreeBlack britishLegionary"></div>-->
+<!--	 		<div class="ship shipUniqueBlack lugdunenseShip"></div>-->
 	 	</div>
  	</div>
+ 	
+ 	<input id="coords" type="text" size="10" /><input id="click" type="text" size="10" />
 </body>
 </html>

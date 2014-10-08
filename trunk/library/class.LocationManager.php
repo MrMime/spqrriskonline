@@ -16,6 +16,18 @@ class LocationManager extends AbstractGenericManager
 		$this->_xml = simplexml_load_file('./db/locations.xml');
 	}
 	
+	public function allBaseGameLocation($locationType = null){
+		$query = $this->_xml->allBaseGameLocation;
+		if (!is_null($locationType)){
+			$query .= $this->_commonXml->where;
+			$query .= $this->_xml->filterByLocationType;
+			$parameters['location_type'] = $locationType;
+		}		
+		//$query .= $this->_xml->orderByLocationTypeInverse;
+		$query .= $this->_xml->orderByIdLocation;		
+		return self::query($query,$parameters);
+	}
+	
 	public function allGameLocation($idGame,$locationType = null){
 		$query = $this->_xml->allGameLocation;
 		$query .= $this->_commonXml->where;
@@ -24,7 +36,7 @@ class LocationManager extends AbstractGenericManager
 		if (!is_null($locationType)){
 			$query .= $this->_xml->filterByLocationType;
 			$parameters['location_type'] = $locationType;
-		}
+		}		
 		return self::query($query,$parameters);
 	}
 	
