@@ -44,8 +44,7 @@ class CombatManager
 		$p1Unit = $player1;
 		$p2Unit = $player2;
 		
-		$p1UnitLost = 0;
-		$p2UnitLost = 0;
+		$p1UnitLost = $p2UnitLost =  0;
 		while ($p1Unit > 0 && $p2Unit > 0){
 			$p1Dice = ($p1Unit <= 3) ? $p1Unit : 3;
 			$p2Dice = ($p2Unit <= 3) ? $p2Unit : 3;
