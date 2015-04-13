@@ -94,11 +94,24 @@ class GameManager extends AbstractGenericManager
 	 * Delegate method for Combat Manager
 	 */
 	public function makeTerranAttack ($p1,$p1Dice,$p2,$p2Dice){
-		$result = CombatManager::terranAttack($p2Dice,$p2Dice,self::getLogManager());
+		$result = CombatManager::terranAttack($p2Dice,$p2Dice,self::getLogManager(),$this->_language);
 		$parameters = array('Player1'=>$p1->getUserName(),'Player2'=>$p2->getUserName());
 		self::getLogManager()->saveLog(self::getIdGame(),$p1->getIdUser(),$p2->getIdUser(),LogManager::LOG_ATTACK,$parameters);
 		return $result;		
-		
+	}
+	
+	public function makeBySeaAttack($p1,$p1Dice,$p2,$p2Dice){
+		$result = CombatManager::bySeaAttack($p2Dice,$p2Dice,self::getLogManager(),$this->_language);
+		$parameters = array('Player1'=>$p1->getUserName(),'Player2'=>$p2->getUserName());
+		self::getLogManager()->saveLog(self::getIdGame(),$p1->getIdUser(),$p2->getIdUser(),LogManager::LOG_ATTACK,$parameters);
+		return $result;
+	}
+	
+	public function makeSeaAttack($p1,$p1Dice,$p2,$p2Dice){
+		$result = CombatManager::seaAttack($p2Dice,$p2Dice,self::getLogManager(),$this->_language);
+		$parameters = array('Player1'=>$p1->getUserName(),'Player2'=>$p2->getUserName());
+		self::getLogManager()->saveLog(self::getIdGame(),$p1->getIdUser(),$p2->getIdUser(),LogManager::LOG_ATTACK,$parameters);
+		return $result;
 	}
 	
 	

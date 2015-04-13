@@ -1,5 +1,8 @@
 <?php
 
+include('library/language/en_EN.php');
+include('library/language/it_IT.php');
+
 include('library/class.AbstractGenericManager.php');
 include('library/class.Cards.php');
 include('library/class.CardsManager.php');
@@ -19,6 +22,8 @@ $GLOBALS['db'] = $db;
 
 $_SESSION['id_game'] = 338;
 $_SESSION['logManager'] = new LogManager();
+$_SESSION['lang'] = 'it';
+
 
  $gameManager = new GameManager();
  
@@ -30,7 +35,9 @@ $_SESSION['logManager'] = new LogManager();
   $p2 = $uManager->loadUserById(2001);
   
   if (!is_null($p1) && !is_null($p2)){
-  	 $gameManager->makeTerranAttack($p1,3,$p2,3);
+  	 //$gameManager->makeBySeaAttack($p1,3,$p2,3);
+  	 //$gameManager->makeTerranAttack($p1,3,$p2,3);
+  	$gameManager->makeSeaAttack($p1,3,$p2,3);
   }
  
  echo '</pre>';

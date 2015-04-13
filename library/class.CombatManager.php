@@ -10,10 +10,10 @@ class CombatManager
 	 * @param Integer player2 unit
 	 * @return array of number of unit lost
 	 */
-	static function terranAttack($player1,$player2,&$logManager){
+	static function terranAttack($player1,$player2,&$logManager,$language){
 		$dices = DiceManager::rollCombatDice($player1, $player2);
-		$logManager->addLog('{Player1} rolls '.implode(";",array_values($dices[0])));
-		$logManager->addLog('{Player2} rolls '.implode(";",array_values($dices[1])));
+		$logManager->addLog('{Player1} '.$language['rolls'].' '.implode(";",array_values($dices[0])));
+		$logManager->addLog('{Player2} '.$language['rolls'].' '.implode(";",array_values($dices[1])));
 		
 		$unitLost = array(0=>0,1=>0);
 		for ($i=0;$i<count($dices[1]);$i++){
@@ -24,6 +24,10 @@ class CombatManager
 				$unitLost[1] += 1;
 			}
 		}
+		
+		$logManager->addLog('{Player1} '.$language['losts'].' '.$unitLost[0].' '.$language['units']);
+		$logManager->addLog('{Player2} '.$language['losts'].' '.$unitLost[1].' '.$language['units']);
+		
 		return $unitLost;
 	}
 	
@@ -36,7 +40,7 @@ class CombatManager
 	 * @param Integer $player2 unit defending
 	 * @return array of number of unit lost
 	 */
-	static function bySeaAttack($player1,$player2,&$logManager){
+	static function bySeaAttack($player1,$player2,&$logManager,$language){
 		$p1Unit = $player1;
 		$p2Unit = $player2;
 		
@@ -45,12 +49,18 @@ class CombatManager
 		while ($p1Unit > 0 && $p2Unit > 0){
 			$p1Dice = ($p1Unit <= 3) ? $p1Unit : 3;
 			$p2Dice = ($p2Unit <= 3) ? $p2Unit : 3;
-			$unitLost = CombatManager::terranAttack($p1Dice, $p2Dice,$logManager);
+			$unitLost = CombatManager::terranAttack($p1Dice, $p2Dice,$logManager,$language);
 			$p1Unit = $p1Unit-$unitLost[0];
 			$p1UnitLost += $unitLost[0];
 			$p2Unit = $p2Unit-$unitLost[1];
 			$p2UnitLost += $unitLost[1];
 		}
+		
+		echo 'ciao';
+		
+		$logManager->addLog('{Player1} '.$language['losts'].' '.$p1UnitLost.' '.$language['units']);
+		$logManager->addLog('{Player2} '.$language['losts'].' '.$p2UnitLost.' '.$language['units']);
+		
 		return array($p1UnitLost,$p2UnitLost);
 	}
 	
@@ -61,12 +71,12 @@ class CombatManager
 	 * @param Integer $player2 unit defending
 	 * @return array of number of unit lost
 	 */
-	static function seaAttack($player1,$player2,&$logManager){
+	static function seaAttack($player1,$player2,&$logManager,$language){
 		$dices = DiceManager::rollCombatDice($player1, $player2);
 		$unitLost = array(0=>0,1=>0);
 		
-		$logManager->addLog('{Player1} rolls '.implode(";",array_values($dices[0])));
-		$logManager->addLog('{Player2} rolls '.implode(";",array_values($dices[1])));
+		$logManager->addLog('{Player1} '.$language['rolls'].' '.implode(";",array_values($dices[0])));
+		$logManager->addLog('{Player2} '.$language['rolls'].' '.implode(";",array_values($dices[1])));
 		
 		for ($i=0;$i<count($dices[1]);$i++){
 			if ($dices[0][$i] == $dices[1][$i]) return $unitLost;
@@ -77,6 +87,10 @@ class CombatManager
 				$unitLost[1] += 1;
 			}
 		}
+		
+		$logManager->addLog('{Player1} '.$language['losts'].' '.$unitLost[0].' '.$language['units']);
+		$logManager->addLog('{Player2} '.$language['losts'].' '.$unitLost[1].' '.$language['units']);
+		
 		return $unitLost;
 	}
 	
