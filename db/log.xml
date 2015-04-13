@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<query>
+
+	<insertLog>
+		INSERT INTO spq_risk_game_log (id_game,log_type,log_date,log_text,id_user_primary,id_user_secondary,id_location_primary,id_location_secondary)
+		VALUES (
+			:id_game,
+			:log_type,
+			:log_date,
+			:log_text,
+			:id_user_primary,
+			:id_user_secondary,
+			:id_location_primary,
+			:id_location_secondary
+		)
+	</insertLog>
+	
+	
+	<selectLogs>
+		SELECT * FROM spq_risk_game_log	UD 
+	</selectLogs>
+
+</query>

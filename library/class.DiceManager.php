@@ -12,13 +12,19 @@ class DiceManager {
 		return rand(1, $face);
 	}
 	
-	static function rollCombatDice($player1,$player2){
+	/**
+	 * Roll a specific number of dices
+	 * @param Integer $player1DiceNumber
+	 * @param Integer $player2DiceNumber
+	 * @return multitype:multitype:NULL
+	 */
+	static function rollCombatDice($player1DiceNumber,$player2DiceNumber){
 		$p1Dices = array();
-		for ($i=0;$i<$player1;$i++){
+		for ($i=0;$i<$player1DiceNumber;$i++){
 			$p1Dices[$i] = DiceManager::rollDice();
 		}
 		$p2Dices = array();
-		for ($i=0;$i<$player2;$i++){
+		for ($i=0;$i<$player2DiceNumber;$i++){
 			$p2Dices[$i] = DiceManager::rollDice();
 		}
 		//Reverse array number from max to min

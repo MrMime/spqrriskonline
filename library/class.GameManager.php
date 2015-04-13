@@ -3,6 +3,9 @@
 
 class GameManager extends AbstractGenericManager
 {
+	
+	private $_idGame = null;
+	
 	function __construct(){
 		global $locationManager;
 		parent::__construct();
@@ -10,16 +13,21 @@ class GameManager extends AbstractGenericManager
 		$this->_locationManager = $locationManager;
 	}
 	
+	function getIdGame(){
+		if (is_null($this->_idGame)) $this->_idGame = $_SESSION['id_game'];
+		return $this->_idGame;
+	}
+	
 	function currentGamePhase($idGame){
 		$query = trim($this->_xml->currentGamePhase);
-		$parameters = array('id_game'=>1);
+		$parameters = array('id_game'=>$idGame);
 		$this->_result = $this->_db->query($query,$parameters);
 		return $this->_result;
 	}
 	
 	function currentGameUserPhase($idGame){
 		$query = trim($this->_xml->currentGameUserPhase);
-		$parameters = array('id_game'=>1);
+		$parameters = array('id_game'=>$idGame);
 		$this->_result = $this->_db->query($query,$parameters);
 		return $this->_result;
 	}
@@ -61,11 +69,37 @@ class GameManager extends AbstractGenericManager
 	}
 	
 	
-	function createNewGame($data){
-		
-	
+	/**
+	 * Create a New Game
+	 * @param String $data with required: game_name, id_lang, game_max_point
+	 */
+	public function createNewGame($data){
+		$query = $this->_xml->insert;
+		$data['game_creation_date'] = date('Y-m-d');
+		return self::query($query,$data);
 	}
 	
+	public function updateGameTurn($data){
+		$query = $this->_xml->updateGameTurn;
+		return self::query($query,$data);
+	}
+	
+	public function endGame($data){
+		$query = $this->_xml->endGame;
+		$data['game_end_date'] = date('Y-m-d');
+		return self::query($query,$data);
+	}
+	
+	/**
+	 * Delegate method for Combat Manager
+	 */
+	public function makeTerranAttack ($p1,$p1Dice,$p2,$p2Dice){
+		$result = CombatManager::terranAttack($p2Dice,$p2Dice,self::getLogManager());
+		$parameters = array('Player1'=>$p1->getUserName(),'Player2'=>$p2->getUserName());
+		self::getLogManager()->saveLog(self::getIdGame(),$p1->getIdUser(),$p2->getIdUser(),LogManager::LOG_ATTACK,$parameters);
+		return $result;		
+		
+	}
 	
 	
 }

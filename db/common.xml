@@ -15,6 +15,21 @@
 		AND UD.ID_USER = :id_user 
 	</filterByUser>
 	
+	<filterByStricklyDateFrom>
+		AND [[datefield]]  &gt; :date_from
+	</filterByStricklyDateFrom>
+	
+	<filterByDateFrom>
+		AND [[datefield]] &gt;= :date_from
+	</filterByDateFrom>
+	
+	<filterByStricklyDateTo>
+		AND [[datefield]] &lt; :date_to
+	</filterByStricklyDateTo>
+	
+	<filterByDateFrom>
+		AND [[datefield]] &lt;= :date_to
+	</filterByDateFrom>
 	
 	<orderByCount>
 		ORDER BY COUNT( * )

@@ -8,9 +8,6 @@ Abstract class AbstractGenericManager
 	protected $_result 	= null;
 	protected $_db		= null;
 	
-	protected $_gameManager = null;
-	protected $_locationManager = null;
-	
 	public function __construct(){
 		global $db;
 		$this->_db = $db;
@@ -23,4 +20,11 @@ Abstract class AbstractGenericManager
 		return $this->_db->query($query,$parameters);
 	}
 	
+	protected function __orNull($data,$label){
+		return !isset($data[$label]) ? null : $data[$label];
+	}	
+	
+	public function getLogManager(){
+		return $_SESSION['logManager'];
+	}
 }

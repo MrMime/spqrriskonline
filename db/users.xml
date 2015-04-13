@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <query>
 	<allUsers>
-		SELECT * FROM spq_risk_users ORDER BY username asc
+		SELECT * FROM spq_risk_user ORDER BY username asc
 	</allUsers>
+	
+	<loadUserById>
+		SELECT 
+			UD.*,
+			SRUS.user_stats_played_games,
+			SRUS.user_stats_won_games,
+			SRUS.user_stats_lost_games
+		FROM spq_risk_user UD
+		LEFT OUTER JOIN spq_risk_user_stats SRUS ON SRUS.ID_USER = UD.ID_USER
+	</loadUserById>
+	
 </query>

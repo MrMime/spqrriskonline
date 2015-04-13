@@ -17,8 +17,29 @@
 	</allGameUser>
 	
 	<insert>
-		INSERT INTO spq_risk_game 
-	
+		INSERT INTO spq_risk_game (GAME_NAME, GAME_CREATION_DATE, GAME_MAX_POINT, ID_LANG)
+		VALUES (
+			:game_name,
+			:game_creation_date,
+			:game_max_point,
+			:id_lang
+		)
 	</insert>
+	
+	<updateGameTurn>
+		UPDATE spq_risk_game SET
+			id_user_current_turn = :id_user_current_turn,
+			game_turn_number = :game_turn_number
+		WHERE
+			id_game = :id_game
+	</updateGameTurn>
+	
+	<endGame>
+		UPDATE spq_risk_game SET
+			id_user_winner = :id_user_winner,
+			game_end_date = :game_end_date
+		WHERE
+			id_game = :id_game
+	</endGame>
 	
 </query>
