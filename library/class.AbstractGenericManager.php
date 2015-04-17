@@ -12,7 +12,6 @@ Abstract class AbstractGenericManager
 		global $db;
 		$this->_db = $db;
 		$this->_commonXml = simplexml_load_file('./db/common.xml');
-		
 		$this->_language = $GLOBALS['language'][$_SESSION['lang']];
 	}
 	

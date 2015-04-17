@@ -7,10 +7,10 @@ class CardsManager {
 	
 	
 	public function __construct(){
-		$this->_grimoryBase[Cards.LEGIONARY] 	= 25;
-		$this->_grimoryBase[Cards.COLISEUM] 	= 5;
-		$this->_grimoryBase[Cards.FLAG] 		= 15;
-		$this->_grimoryBase[Cards.SHIP] 		= 10;
+		$this->_grimoryBase[Cards::LEGIONARY] 	= 25;
+		$this->_grimoryBase[Cards::COLISEUM] 	= 5;
+		$this->_grimoryBase[Cards::FLAG] 		= 15;
+		$this->_grimoryBase[Cards::SHIP] 		= 10;
 	}
 	
 	/**
@@ -21,24 +21,24 @@ class CardsManager {
 		$i = 0;
 		while(array_sum($grimory) > 0){
 			$card = rand(1,55);
-			if ($card > 10 && $card <=35 && $grimory[Cards.LEGIONARY]>0){
-				$this->_startupGrimory[$i] = Cards.LEGIONARY;
-				$grimory[Cards.LEGIONARY]-=1;
+			if ($card > 10 && $card <=35 && $grimory[Cards::LEGIONARY]>0){
+				$this->_startupGrimory[$i] = Cards::LEGIONARY;
+				$grimory[Cards::LEGIONARY]-=1;
 				$i++;
 			}
-			if ($card >35 && $card < 50 && $grimory[Cards.FLAG]>0){
-				$this->_startupGrimory[$i] = Cards.FLAG;
-				$grimory[Cards.FLAG]-=1;
+			if ($card >35 && $card < 50 && $grimory[Cards::FLAG]>0){
+				$this->_startupGrimory[$i] = Cards::FLAG;
+				$grimory[Cards::FLAG]-=1;
 				$i++;
 			}
-			if ($card <= 10 && $grimory[Cards.SHIP]>0){
-				$this->_startupGrimory[$i] = Cards.SHIP;
-				$grimory[Cards.SHIP]-=1;
+			if ($card <= 10 && $grimory[Cards::SHIP]>0){
+				$this->_startupGrimory[$i] = Cards::SHIP;
+				$grimory[Cards::SHIP]-=1;
 				$i++;
 			}
-			if ($card >50 && $grimory[Cards.COLISEUM]>0){
-				$this->_startupGrimory[$i] = Cards.COLISEUM;
-				$grimory[Cards.COLISEUM]-=1;
+			if ($card >50 && $grimory[Cards::COLISEUM]>0){
+				$this->_startupGrimory[$i] = Cards::COLISEUM;
+				$grimory[Cards::COLISEUM]-=1;
 				$i++;
 			}
 		}
@@ -68,13 +68,13 @@ class CardsManager {
 		$ship = 0;
 		$coliseum = 0;
 		foreach($tris as $card){
-			if ($card == Cards.FLAG){
+			if ($card == Cards::FLAG){
 				$addedLegionary += 2;
 			}
-			if ($card == Cards.COLISEUM){
+			if ($card == Cards::COLISEUM){
 				$coliseum +=1;
 			}
-			if ($card == Cards.SHIP){
+			if ($card == Cards::SHIP){
 				$ship += 1;
 			}
 		}
