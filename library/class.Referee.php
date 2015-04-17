@@ -12,7 +12,11 @@ class Referee
 	const CONTINUE_PAGE		= "continuePage.html";
 	const STATS_PAGE		= "statsPage.html";
 	
+	private $_gameManager = null;
+	
 	function __construct(){
+		
+		$this->_gameManager = new GameManager();
 		
 	}
 	
@@ -32,6 +36,20 @@ class Referee
 			
 		}
 	}
+	
+	public function getAction($request){
+		
+		if (isset($request['doAction']) && $request['doAction'] == 1){
+			
+			switch($request['actionName']){
+				case 'createGame': $this->_gameManager->createNewGame($request);  break;
+				
+			}
+			
+			
+		}
+		
+	} 
 	
 	
 }

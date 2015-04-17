@@ -76,7 +76,8 @@ class GameManager extends AbstractGenericManager
 	public function createNewGame($data){
 		$query = $this->_xml->insert;
 		$data['game_creation_date'] = date('Y-m-d');
-		return self::query($query,$data);
+		$_SESSION['game']['currentGame']['idGame'] = self::query($query,$data); 
+		return $_SESSION['game']['currentGame']['idGame'];
 	}
 	
 	public function updateGameTurn($data){

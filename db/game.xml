@@ -17,9 +17,10 @@
 	</allGameUser>
 	
 	<insert>
-		INSERT INTO spq_risk_game (GAME_NAME, GAME_CREATION_DATE, GAME_MAX_POINT, ID_LANG)
+		INSERT INTO spq_risk_game (GAME_NAME, GAME_PLAYERS, GAME_CREATION_DATE, GAME_MAX_POINT, ID_LANG)
 		VALUES (
 			:game_name,
+			:game_players,
 			:game_creation_date,
 			:game_max_point,
 			:id_lang
