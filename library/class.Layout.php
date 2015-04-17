@@ -26,11 +26,19 @@ class Layout
 		}
 	}
 	
+	private function __replaceParameters(){
+		if (isset($_SESSION['parameters'])){
+			foreach ($_SESSION['parameters'] as $key=>$value){
+				$this->_finalPage = str_replace('{'.$key.'}',$value,$this->_finalPage);
+			}
+		}
+	}
+	
 	public function getPage(){
 		$this->_finalPage = str_replace ('[[page-content]]',$this->_currentPage,$this->_basePage);
 		$this->_finalPage = str_replace ('[[layout-path]]',$this->_layPath,$this->_finalPage);
 		self::__replaceLanguage();
-		
+		self::__replaceParameters();
 		return $this->_finalPage;
 	}
 	

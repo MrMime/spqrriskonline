@@ -25,13 +25,26 @@ $GLOBALS['db'] = $db;
 
 $_SESSION['id_game'] = 338;
 $_SESSION['logManager'] = new LogManager();
-$_SESSION['lang'] = 'it';
+
+
+if (isset($_GET['changeLang'])){
+	$_SESSION['lang'] = $_GET['changeLang'];
+}
+else {
+	if (!isset($_SESSION['lang'])){
+		$_SESSION['lang'] = 'it';
+	}
+}
+
 
 $lay = new Layout();
 
 $ref = new Referee();
 
+$ref->getAction($_REQUEST);
 $pp = $ref->getPageFromGet($_REQUEST);
+
+$_SESSION['parameters']['page-title-addon'] = (isset($_SESSION['parameters']['page-title-addon'])) ? $_SESSION['parameters']['page-title-addon'] : 'Home';
 
 $lay->setContentPage($pp);
 

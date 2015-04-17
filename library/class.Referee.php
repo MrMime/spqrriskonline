@@ -12,6 +12,8 @@ class Referee
 	const CONTINUE_PAGE		= "continuePage.html";
 	const STATS_PAGE		= "statsPage.html";
 	
+	const NEW_GAME_PAGE		= "newGamePage.html";
+	
 	private $_gameManager = null;
 	
 	function __construct(){
@@ -30,6 +32,7 @@ class Referee
 			case 'continue': return Referee::CONTINUE_PAGE; break;
 			case 'stats': return Referee::STATS_PAGE; break;
 			case 'contact': return Referee::CONTACT_PAGE; break;
+			case 'newGame': return Referee::NEW_GAME_PAGE; break;
 			case 'new' :
 			default: 
 			return Referee::CREATE_PAGE;
@@ -42,10 +45,8 @@ class Referee
 		if (isset($request['doAction']) && $request['doAction'] == 1){
 			
 			switch($request['actionName']){
-				case 'createGame': $this->_gameManager->createNewGame($request);  break;
-				
+				case 'createGame': return $this->_gameManager->createNewGame($request['game']);  break;
 			}
-			
 			
 		}
 		

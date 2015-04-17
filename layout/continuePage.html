@@ -1,0 +1,23 @@
+<div class="container theme-showcase" role="main">
+      <!-- Main jumbotron for a primary marketing message or call to action -->
+      <div class="jumbotron">
+      
+       <form method="POST" action="index.php?page=newGame">
+	    
+	    	<input type="hidden" name="doAction" value="1" />
+	    	<input type="hidden" name="actionName" value="continueGame" />
+	    	
+	    	
+	    	<div class="form-group">
+		        <label for="id_game">{game_id_form_label}</label>
+		        <input type="text" name="game[id_game]" class="form-control" id="id_game" placeholder="id_game" required>
+		    </div>
+		    
+		    
+		    <button type="submit" class="btn btn-primary">{game_resume_form_label}</button>
+	    	
+	   </form> 	
+      
+      
+      </div>
+</div>

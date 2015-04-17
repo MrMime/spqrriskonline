@@ -77,6 +77,7 @@ class GameManager extends AbstractGenericManager
 		$query = $this->_xml->insert;
 		$data['game_creation_date'] = date('Y-m-d');
 		$_SESSION['game']['currentGame']['idGame'] = self::query($query,$data); 
+		$_SESSION['parameters']['id_game'] = $_SESSION['game']['currentGame']['idGame']; //parameters value for layout replacing 
 		return $_SESSION['game']['currentGame']['idGame'];
 	}
 	

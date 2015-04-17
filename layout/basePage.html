@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>SPQ-CATs</title>
+    <title>S.P.Q.R. CATs {page-title-addon}</title>
 
     <!-- Bootstrap core CSS -->
     <link href="[[layout-path]]css/bootstrap.css" rel="stylesheet">
@@ -21,7 +21,7 @@
     <link href="[[layout-path]]css/overwrite.css" rel="stylesheet">
     <link href="[[layout-path]]css/style.css" rel="stylesheet">
     
-    
+    <link href="[[layout-path]]css/languages.min.css" rel="stylesheet">
     <link href="[[layout-path]]css/theme.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -42,16 +42,20 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">SPQ-CATs</a>
+          <a class="navbar-brand" href="#">S.P.Q.R CATs</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="index.php">Home</a></li>
-            <li><a href="index.php?page=new">New Game</a></li>
-            <li><a href="index.php?page=continue">Continue</a></li>
-            <li><a href="index.php?page=stats">Stats</a></li>
-            <li><a href="index.php?page=about">About</a></li>
-            <li><a href="index.php?page=contact">Contact</a></li>
+			<li class="active"><a href="index.php">{home_menu_label}</a></li>
+			<li><a href="index.php?page=new">{new_game_menu_label}</a></li>
+			<li><a href="index.php?page=continue">{continue_game_menu_label}</a></li>
+			<li><a href="index.php?page=stats">{stats_game_menu_label}</a></li>
+			<li><a href="index.php?page=about">{about_me_menu_label}</a></li>
+			<li><a href="index.php?page=contact">{contact_menu_label}</a></li>
+			<li>
+				<a href="index.php?changeLang=it"><span class="lang-sm" lang="it" title="italiano"></span></a>
+				<a href="index.php?changeLang=en"><span class="lang-sm" lang="en" title="english"></span></a>
+			</li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -59,7 +63,6 @@
     
     
     [[page-content]]
-    
     
     
       <!-- Footer -->

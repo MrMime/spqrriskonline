@@ -2,19 +2,19 @@
       <!-- Main jumbotron for a primary marketing message or call to action -->
       <div class="jumbotron">
 	    
-	    <form method="POST" action="index.php">
+	    <form method="POST" action="index.php?page=newGame">
 	    
 	    	<input type="hidden" name="doAction" value="1" />
 	    	<input type="hidden" name="actionName" value="createGame" />
 	    	
 	    	<div class="form-group">
 		        <label for="game_name">{game_name_form_label}</label>
-		        <input type="text" class="form-control" id="game_name" placeholder="game_name" required>
+		        <input type="text" name="game[game_name]" class="form-control" id="game_name" placeholder="game_name" required>
 		    </div>
 		    
 		    <div class="form-group">
 			  <label for="game_players">{game_player_form_label}</label>
-			  <select class="form-control" id="game_players" name="game_players">
+			  <select class="form-control" id="game_players" name="game[game_players]">
 			    <option>3</option>
 			    <option>4</option>
 			    <option>5</option>
@@ -23,7 +23,7 @@
 			
 			<div class="form-group">
 			  <label for="id_lang">{game_language_form_label}</label>
-			  <select class="form-control" id="id_lang" name="id_lang">
+			  <select class="form-control" id="id_lang" name="game[id_lang]">
 			    <option value="1">ITA</option>
 			    <option value="2">ENG</option>
 			  </select>
@@ -31,7 +31,7 @@
 			
 			<div class="form-group">
 			  <label for="game_max_point">{game_max_point_form_label}</label>
-			  <select class="form-control" id="game_max_point" name="game_max_point">
+			  <select class="form-control" id="game_max_point" name="game[game_max_point]">
 			    <option value="5">5</option>
 			    <option value="10">10</option>
 			    <option value="15">15</option>
