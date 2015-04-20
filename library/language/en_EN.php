@@ -4,6 +4,8 @@ $lang["rolls"] = "rolls";
 $lang["losts"] = "losts";
 $lang["units"] = "units";
 
+$lang["game_not_found"] = "Game not Found";
+
 //MENU
 $lang["home_menu_label"] = "Home";
 $lang["new_game_menu_label"] = "New Game";

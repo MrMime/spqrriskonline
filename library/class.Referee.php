@@ -46,6 +46,12 @@ class Referee
 			
 			switch($request['actionName']){
 				case 'createGame': return $this->_gameManager->createNewGame($request['game']);  break;
+				case 'continueGame':	$gameInfo = $this->_gameManager->loadGameInfo($request['game']['id_game']);
+									if ($gameInfo == null){
+										$_SESSION['error-message'] = $GLOBALS["language"][$_SESSION['lang']]['game_not_found'];
+									}
+									return $gameInfo; 
+									break;
 			}
 			
 		}

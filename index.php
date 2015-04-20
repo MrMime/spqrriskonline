@@ -1,5 +1,7 @@
 <?php
 
+@session_start();
+
 require_once('library/language/en_EN.php');
 require_once('library/language/it_IT.php');
 
@@ -23,7 +25,6 @@ $db = new PDFDatabase();
 $db->connect("root", "", "spq_risk", "localhost:3306");
 $GLOBALS['db'] = $db;
 
-$_SESSION['id_game'] = 338;
 $_SESSION['logManager'] = new LogManager();
 
 
@@ -36,12 +37,12 @@ else {
 	}
 }
 
-
 $lay = new Layout();
 
 $ref = new Referee();
 
-$ref->getAction($_REQUEST);
+$actionResult = $ref->getAction($_REQUEST);
+
 $pp = $ref->getPageFromGet($_REQUEST);
 
 $_SESSION['parameters']['page-title-addon'] = (isset($_SESSION['parameters']['page-title-addon'])) ? $_SESSION['parameters']['page-title-addon'] : 'Home';

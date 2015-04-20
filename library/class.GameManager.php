@@ -18,21 +18,28 @@ class GameManager extends AbstractGenericManager
 		return $this->_idGame;
 	}
 	
-	function currentGamePhase($idGame){
+	public function loadGameInfo($idGame){
+		$query = trim($this->_xml->loadGameInfo);
+		$parameters = array('id_game'=>$idGame);
+		$this->_result = $this->_db->query($query,$parameters);
+		return $this->_result;
+	} 
+	
+	public function currentGamePhase($idGame){
 		$query = trim($this->_xml->currentGamePhase);
 		$parameters = array('id_game'=>$idGame);
 		$this->_result = $this->_db->query($query,$parameters);
 		return $this->_result;
 	}
 	
-	function currentGameUserPhase($idGame){
+	public function currentGameUserPhase($idGame){
 		$query = trim($this->_xml->currentGameUserPhase);
 		$parameters = array('id_game'=>$idGame);
 		$this->_result = $this->_db->query($query,$parameters);
 		return $this->_result;
 	}
 	
-	function allGameUsers($idGame){
+	public function allGameUsers($idGame){
 		$query = $this->_xml->allGameUser;
 		$query .= $this->_commonXml->where;
 		$query .= $this->_commonXml->filterByGame;
@@ -40,7 +47,7 @@ class GameManager extends AbstractGenericManager
 		return self::query($query,$parameters);
 	}
 	
-	function countIniRoundUserPoint($idGame,$idUser){
+	public function countIniRoundUserPoint($idGame,$idUser){
 		$points = 0;
 		//check if the user is the user with most sea territory
 		$idUserMostNaval = $this->_locationManager->userWithMostSeaTerritory($idGame);

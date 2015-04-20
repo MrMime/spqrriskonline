@@ -37,6 +37,16 @@ class Layout
 	public function getPage(){
 		$this->_finalPage = str_replace ('[[page-content]]',$this->_currentPage,$this->_basePage);
 		$this->_finalPage = str_replace ('[[layout-path]]',$this->_layPath,$this->_finalPage);
+		
+		if (isset($_SESSION['error-message'])){
+			$this->_finalPage = str_replace ('[[error-message]]',$_SESSION['error-message'],$this->_finalPage);
+			$this->_finalPage = str_replace ('[[display-error]]','block',$this->_finalPage);
+			unset($_SESSION['error-message']);
+		}
+		else {
+			$this->_finalPage = str_replace ('[[display-error]]','none',$this->_finalPage);
+		}
+		
 		self::__replaceLanguage();
 		self::__replaceParameters();
 		return $this->_finalPage;

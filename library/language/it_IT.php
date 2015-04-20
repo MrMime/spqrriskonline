@@ -4,6 +4,8 @@ $lang["rolls"] = "rolla";
 $lang["losts"] = "perde";
 $lang["units"] = "unita";
 
+$lang["game_not_found"] = "Partita non trovata";
+
 $lang["home_menu_label"] = "Home";
 $lang["new_game_menu_label"] = "Nuova Partita";
 $lang["continue_game_menu_label"] = "Riprendi Partita";
